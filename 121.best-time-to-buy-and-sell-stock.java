@@ -5,7 +5,7 @@ class Solution {
             return 0;
         }
 
-        int minSoFar = prices[0], max = -1;
+        int minSoFar = prices[0], max = 0;
 
         for(int i = 1; i < prices.length; i++) {
             max = Math.max(max, prices[i] - minSoFar);
