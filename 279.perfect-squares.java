@@ -13,7 +13,7 @@ class Solution {
 
             int temp = Integer.MAX_VALUE;
 
-            for(int j = 1; j * j < i; j++) {
+            for(int j = 1; j * j <= i; j++) {
                 temp = Math.min(temp, dp[i - j * j] + 1);
             }
 
