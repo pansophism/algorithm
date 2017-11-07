@@ -1,0 +1,12 @@
+[21] Merge Two Sorted Lists  
+
+https://leetcode.com/problems/merge-two-sorted-lists
+
+* algorithms
+* Easy (39.28%)
+* Source Code:       21.merge-two-sorted-lists.java
+* Total Accepted:    274.9K
+* Total Submissions: 699.8K
+* Testcase Example:  '[]\n[]'
+
+Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
