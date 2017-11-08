@@ -21,9 +21,12 @@ class Solution {
 
         for(int i = 1; i <= k; i++) {
 
+            // buy at the first day how much i would make / invest
             int pMax = 0 - prices[0];
+
             for(int j = 1; j < prices.length; j++) {
                 space[i][j] = Math.max(space[i][j - 1], pMax + prices[j]);
+                // what if I buy / invest today
                 pMax = Math.max(pMax, space[i - 1][j] - prices[j]);
             }
         }
