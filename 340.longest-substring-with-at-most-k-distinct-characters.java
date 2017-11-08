@@ -2,7 +2,7 @@ class Solution {
 
     public int lengthOfLongestSubstringKDistinct(String s, int k) {
 
-        if(s == null || s.length == 0) {
+        if(s == null || s.length() == 0 || k == 0) {
             return 0;
         }
 
@@ -14,11 +14,13 @@ class Solution {
         int i = 0, j = 0;
 
         while(j < arr.length) {
-            if(count == k) {
-                maxLen = Math.max(maxLen, j - i + 1);
+            if(dict[arr[j]] == 0) {
+                count++;
             }
+            dict[arr[j]]++;
+            j++;
 
-            while(count >= k) {
+            while(count > k && i < arr.length) {
                 dict[arr[i]]--;
                 if(dict[arr[i]] == 0) {
                     count--;
@@ -26,11 +28,8 @@ class Solution {
                 i++;
             }
 
-            if(dict[arr[j]] == 0) {
-                count++;
-            }
-            dict[arr[j]]++;
-            j++;
+            maxLen = Math.max(maxLen, j - i);
+
         }
 
         return maxLen;
