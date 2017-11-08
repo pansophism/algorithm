@@ -28,9 +28,7 @@ class Solution {
                 i++;
             }
 
-            if(count == k) {
-                maxLen = Math.max(maxLen, j - i);
-            }
+            maxLen = Math.max(maxLen, j - i);
 
         }
 
