@@ -2,27 +2,34 @@
 class Solution {
 
     public List<String> wordBreak(String s, List<String> wordDict) {
-
-        Set<String> dict = new HashSet<>(wordDict);
-        List<String> result = new ArrayList<>();
-
-        dfs(result, s, 0, dict, "");
-
-        return result;
+        return dfs(s, new HashSet<>(wordDict), new HashMap<String, LinkedList<String>>());
     }
 
-    private void dfs(List<String> result, String s, int index, Set<String> dict, String previous) {
-        if(index == s.length()) {
-            result.add(previous);
-            return;
+    private List<String> dfs(String s, Set<String> dict, HashMap<String, LinkedList<String>> map) {
+        if(map.containsKey(s)) {
+            return map.get(s);
         }
 
-        for(int j = index + 1; j <= s.length(); j++) {
-            String t = s.substring(index, j);
-            if(dict.contains(t)) {
-                dfs(result, s, j, dict, previous + (previous.length() == 0 ? "" : " ") + t);
+        LinkedList<String> res = new LinkedList<String>();
+
+        if(s.length() == 0) {
+            res.add("");
+            return res;
+        }
+
+        for(String word : dict) {
+            if(s.startsWith(word)) {
+                List<String> sublist = dfs(s.substring(word.length()), dict, map);
+
+                for(String sub : sublist) {
+                    res.add(word + (sub.isEmpty() ? "" : " ") + sub);
+                }
             }
         }
+
+        map.put(s, res);
+
+        return res;
 
     }
 }
