@@ -19,7 +19,7 @@ class Solution {
 
         for(int i = 1; i <= sArr.length; i++) {
             for(int j = 1; j <= pArr.length; j++) {
-                if(sArr[i - 1] == pArr[j - 1]) {
+                if(sArr[i - 1] == pArr[j - 1] || pArr[j - 1] == '.') {
                     space[i][j] = space[i - 1][j - 1];
                 } else if(pArr[j - 1] == '*') {
                     if(sArr[i - 1] == pArr[j - 2] || pArr[j - 2] == '.') {
