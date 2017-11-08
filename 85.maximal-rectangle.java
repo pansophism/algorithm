@@ -24,18 +24,15 @@ class Solution {
             Stack<Integer> stack = new Stack<>();
 
             for(int i = 0; i <= row.length; i++) {
-                if(stack.isEmpty() || row[i] >= stack.peek()) {
+                if(stack.isEmpty() || hi[i] >= hi[stack.peek()]) {
                     stack.push(i);
                 } else {
-                    while(!stack.isEmpty() && stack.peek() > hi[i]) {
-                        int area = (i - stack.peek() + 1) * stack.peek();
+                    while(!stack.isEmpty() && hi[stack.peek()] > hi[i]) {
+                        int top = stack.pop();
+                        int area = hi[top] * (stack.isEmpty() ? i : (i - stack.peek() - 1));
                         max = Math.max(max, area);
                     }
-
-                    if(stack.isEmpty()) {
-                        int area = (i + 1) * hi[i];
-                        max = Math.max(max, area);
-                    }
+                    stack.push(i);
                 }
             }
 
