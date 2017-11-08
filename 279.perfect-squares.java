@@ -8,19 +8,21 @@ class Solution {
         int [] space = new int[n + 1];
         space[0] = 0;
         space[1] = 1;
+        space[2] = 2;
+        space[3] = 3;
 
-        for(int i = 2; i <= n; i++) {
+        for(int i = 4; i <= n; i++) {
 
-            int temp = Integer.MAX_VALUE;
-
+            int t = Integer.MAX_VALUE;
             for(int j = 1; j * j <= i; j++) {
-                temp = Math.min(temp, space[i - j * j] + 1);
+                t = Math.min(t, space[i - j * j] + 1);
             }
 
-            space[i] = temp;
+            space[i] = t;
         }
 
         return space[n];
+
 
     }
 }
