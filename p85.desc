@@ -1,0 +1,24 @@
+[85] Maximal Rectangle  
+
+https://leetcode.com/problems/maximal-rectangle
+
+* algorithms
+* Hard (28.70%)
+* Source Code:       85.maximal-rectangle.java
+* Total Accepted:    75.6K
+* Total Submissions: 263.4K
+* Testcase Example:  '[["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]'
+
+
+Given a 2D binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.
+
+
+For example, given the following matrix:
+
+1 0 1 0 0
+1 0 1 1 1
+1 1 1 1 1
+1 0 0 1 0
+
+Return 6.
+
