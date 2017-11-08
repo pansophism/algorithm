@@ -13,7 +13,7 @@ class Solution {
             int pMax = space[i - 1][0] - prices[0];
             for(int j = 1; j < prices.length; j++) {
                 space[i][j] = Math.max(space[i][j - 1], pMax + prices[j]);
-                pMax = Math.max(pMax, space[i][j - 1] - prices[j]);
+                pMax = Math.max(pMax, space[i - 1][j] - prices[j]);
             }
         }
 
