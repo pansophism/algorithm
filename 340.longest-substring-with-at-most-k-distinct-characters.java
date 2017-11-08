@@ -2,6 +2,10 @@ class Solution {
 
     public int lengthOfLongestSubstringKDistinct(String s, int k) {
 
+        if(s == null || s.length == 0) {
+            return 0;
+        }
+
         char [] dict = new char[256];
         int count = 0, maxLen = 0;
 
