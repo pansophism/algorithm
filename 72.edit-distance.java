@@ -1,7 +1,7 @@
 class Solution {
     public int minDistance(String word1, String word2) {
         if(word1 == null || word2 == null) {
-            return false;
+            return -1;
         }
 
         char [] arr1 = word1.toCharArray();
