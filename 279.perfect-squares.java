@@ -5,22 +5,22 @@ class Solution {
             return n;
         }
 
-        int [] dp = new int[n + 1];
-        dp[1] = 1;
-        dp[2] = 2;
+        int [] space = new int[n + 1];
+        space[0] = 0;
+        space[1] = 1;
 
-        for(int i = 3; i <= n; i++) {
+        for(int i = 2; i <= n; i++) {
 
             int temp = Integer.MAX_VALUE;
 
             for(int j = 1; j * j <= i; j++) {
-                temp = Math.min(temp, dp[i - j * j] + 1);
+                temp = Math.min(temp, space[i - j * j] + 1);
             }
 
-            dp[i] = temp;
+            space[i] = temp;
         }
 
-        return dp[n];
+        return space[n];
 
     }
 }
