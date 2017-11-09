@@ -11,8 +11,8 @@ class Solution {
                 min = t;
             }
 
-            max = Math.max(max, max * nums[i]);
-            min = Math.min(min, min * nums[i]);
+            max = Math.max(nums[i], max * nums[i]);
+            min = Math.min(nums[i], min * nums[i]);
 
             r = Math.max(r, max);
 
