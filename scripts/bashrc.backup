@@ -1,0 +1,94 @@
+# .bashrc
+
+export TERM=xterm
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
+# eval "$(fasd --init auto)"
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+alias lt='leetcode'
+alias vi='vim'
+###-begin-leetcode-completions-###
+#
+# yargs command completion script
+#
+# Installation: leetcode completion >> ~/.bashrc
+#    or leetcode completion >> ~/.bash_profile on OSX.
+#
+_yargs_completions()
+{
+    local cur_word args type_list
+
+    cur_word="${COMP_WORDS[COMP_CWORD]}"
+    args=("${COMP_WORDS[@]}")
+
+    # ask yargs to generate completions.
+    type_list=$(leetcode --get-yargs-completions "${args[@]}")
+
+    COMPREPLY=( $(compgen -W "${type_list}" -- ${cur_word}) )
+
+    # if no match was found, fall back to filename completion
+    if [ ${#COMPREPLY[@]} -eq 0 ]; then
+      COMPREPLY=( $(compgen -f -- "${cur_word}" ) )
+    fi
+
+    return 0
+}
+complete -F _yargs_completions leetcode
+###-end-leetcode-completions-###
+
+alias gp='git push'
+alias gco='git checkout'
+alias gci='git ci'
+alias grb='git rebase'
+alias gbr='git branch'
+alias gst='git status'
+alias grup='git remote update'
+alias gll='git log --stat'
+alias test='leetcode test'
+
+
+export CODE_HOME=~/code
+
+show() {
+    p=$1;
+
+    cd $CODE_HOME;
+
+    if [ ! -f description/p$p.desc ]; then
+        echo "grep p$p.desc from server"
+        leetcode show $p -g > description/p$p.desc
+    fi
+
+    clear;
+    cat description/p$p.desc
+
+    cd -
+}
+
+submit() {
+    p=$1
+
+    cd $CODE_HOME;
+
+    if [ ! -f $p ]; then
+        echo "no solution for question : $p"
+    else
+        git add ./*java
+        git add ./*desc
+        git commit -m "commiting $p"
+        git push
+        leetcode submit $p
+    fi
+}
+
+EDITOR=vim
