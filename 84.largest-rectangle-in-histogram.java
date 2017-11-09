@@ -41,8 +41,7 @@ class Solution {
         // popped bar as the smallest bar
         while (s.empty() == false)
         {
-            tp = s.peek();
-            s.pop();
+            tp = s.pop();
             area_with_top = hist[tp] * (s.empty() ? i : i - s.peek() - 1);
 
             if (max_area < area_with_top)
