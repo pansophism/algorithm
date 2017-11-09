@@ -3,6 +3,8 @@ class Solution {
     public int rob(int[] nums) {
         if(nums == null || nums.length == 0) {
             return 0;
+        } else if(nums.length == 1) {
+            return nums[0];
         }
 
         int [] arr = new int[nums.length];
