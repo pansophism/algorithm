@@ -1,7 +1,7 @@
 class Solution {
 
-    public int largestRectangleArea(int[] heights) {
-        int n = heights.length;
+    public int largestRectangleArea(int[] hist) {
+        int n = hist.length;
 
         // Create an empty stack. The stack holds indexes of hist[] array
         // The bars stored in stack are always in increasing order of their
