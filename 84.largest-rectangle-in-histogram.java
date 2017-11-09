@@ -12,7 +12,7 @@ class Solution {
             } else {
                 while(!stack.isEmpty() && heights[stack.peek()] > heights[i]) {
                     int top = stack.pop();
-                    int area = heights[top] * (stack.isEmpty() ? i : i - stack.peek() + 1);
+                    int area = heights[top] * (stack.isEmpty() ? i : i - stack.peek() - 1);
                     max = Math.max(area, max);
                 }
 
