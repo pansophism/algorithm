@@ -9,7 +9,7 @@ class Solution {
 
         for(int i = 1; i <= s.length(); i++) {
             for(int j = 0; j < i; j++) {
-                if(arr[j] && dict.contains(s.substring(j, i)) {
+                if(arr[j] && dict.contains(s.substring(j, i))) {
                     arr[i] = true;
                     break;
                 }
