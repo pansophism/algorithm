@@ -24,9 +24,9 @@ class Solution {
                 } else {
                     if(pArr[j - 1] == '*') {
                         if(pArr[j - 2] == sArr[i - 1] || pArr[j - 2] == '.') {
-                            dp[i][j] = dp[i - 1][j] | dp[i][j - 1] | dp[i][j - 2];
+                            dp[i][j] = dp[i - 1][j] || dp[i][j - 1] || dp[i][j - 2];
                         } else {
-                            dp[i][j] = dp[i - 1][j];
+                            dp[i][j] = dp[i][j - 2];
                         }
                     }
                 }
