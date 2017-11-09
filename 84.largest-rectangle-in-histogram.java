@@ -11,7 +11,8 @@ class Solution {
                 stack.push(i);
             } else {
                 int pre = stack.pop();
-                area = Math.max(area, heights[pre] * (stack.isEmpty() ? i : i - 1 - stack.peek()));
+                area = Math.max(area,
+                        heights[pre] * (stack.isEmpty() ? i : i - 1 - stack.peek()));
                 i--;
 
             }
