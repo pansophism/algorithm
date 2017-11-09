@@ -1,21 +1,19 @@
 class Solution {
 
     public boolean wordBreak(String s, List<String> wordDict) {
-        Set<String> dict = new HashSet<>(wordDict);
 
-        boolean [] arr = new boolean[s.length() + 1];
-        arr[0] = true;
+        if(s.length() == 0) {
+            return true;
+        }
 
-        for(int i = 1; i <= s.length(); i++) {
-            for(int j = 0; j < i; j++) {
-                if(arr[j] && dict.contains(s.substring(j, i))) {
-                    arr[i] = true;
-                    break;
-                }
+        for(String w : wordDict) {
+            // System.out.println("string : " + s + " word : " + w);
+            if(s.startsWith(w)) {
+                return wordBreak(s.substring(w.length()), wordDict);
             }
         }
 
-        return arr[s.length()];
+        return false;
 
     }
 }
