@@ -10,7 +10,7 @@ class Solution {
         int [][] dp = new int[k + 1][prices.length];
 
         for(int i = 1; i <= k; i++) {
-            for(int j = 0; j < prices.length; j++) {
+            for(int j = 1; j < prices.length; j++) {
                 int temp = 0;
                 for(int m = 0; m < j; m++) {
                     temp = Math.max(0, dp[i - 1][m] - prices[m] + prices[j]);
