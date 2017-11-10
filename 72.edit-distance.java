@@ -10,10 +10,18 @@ class Solution {
 
         int [][] space = new int[arr1.length + 1][arr2.length + 1];
 
+        for(int i = 0; i <= arr1.length; i++) {
+            space[i][0] = i;
+        }
+
+        for(int i = 0; i <= arr2.length; i++) {
+            space[0][i] = i;
+        }
+
 
         for(int i = 1; i <= arr1.length; i++) {
             for(int j = 1; j <= arr2.length; j++) {
-                if(arr1[i] == arr2[j]) {
+                if(arr1[i - 1] == arr2[j - 1]) {
                     space[i][j] = space[i - 1][j - 1];
                 } else {
                     space[i][j] = Math.min(space[i - 1][j - 1], Math.min(space[i - 1][j], space[i][j - 1])) + 1;
