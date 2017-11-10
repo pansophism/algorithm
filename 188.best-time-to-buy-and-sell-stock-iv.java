@@ -6,21 +6,19 @@ class Solution {
             return 0;
         }
 
-        int max = 0;
         int [][] dp = new int[k + 1][prices.length];
 
         for(int i = 1; i <= k; i++) {
             for(int j = 1; j < prices.length; j++) {
                 int temp = 0;
                 for(int m = 0; m < j; m++) {
-                    temp = Math.max(0, dp[i - 1][m] - prices[m] + prices[j]);
+                    temp = Math.max(dp[i][j - 1], dp[i - 1][m] - prices[m] + prices[j]);
                 }
                 dp[i][j] = temp;
-                max = Math.max(temp, max);
             }
         }
 
-        return max;
+        return dp[k][prices.length - 1];
 
     }
 }
