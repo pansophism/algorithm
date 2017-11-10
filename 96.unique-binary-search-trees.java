@@ -8,11 +8,9 @@ class Solution {
 
         for(int i = 2; i <= n; i++) {
             space[i] = 0;
-
             for(int j = 1; j <= i; j++) {
-                space[i] += space[j - 1] * space[i - j];
+                space[i] += (space[i - j] * space[j - 1]);
             }
-
         }
 
         return space[n];
