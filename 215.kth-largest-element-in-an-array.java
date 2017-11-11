@@ -1,7 +1,7 @@
 class Solution {
 
     public int findKthLargest(int[] nums, int k) {
-        return findKthLargest(nums, 0, nums.length - 1, k);
+        return findKthLargest(nums, 0, nums.length - 1, n - k + 1);
     }
 
     private void swap(int [] nums, int from, int to) {
@@ -11,11 +11,8 @@ class Solution {
     }
 
     private int findKthLargest(int [] nums, int start, int end, int k) {
-        if(k == 0) {
-            return nums[start - 1];
-        }
 
-        int i = start, j = end - 1;
+        int i = start, j = end;
 
         while(i < j) {
             if(nums[i] >= nums[end]) {
@@ -27,10 +24,14 @@ class Solution {
 
         swap(nums, i, end);
 
-        if(i > k) {
+        int m = i - start + 1;
+
+        if(m == k) {
+            return i;
+        } else if(m > k) {
             return findKthLargest(nums, start, i - 1, k);
         } else {
-            return findKthLargest(nums, i + 1, end, k - (i - start + 1));
+            return findKthLargest(nums, i + 1, end, k - m);
         }
     }
 }
