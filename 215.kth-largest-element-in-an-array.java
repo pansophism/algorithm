@@ -1,7 +1,7 @@
 class Solution {
 
     public int findKthLargest(int[] nums, int k) {
-        return findKthLargest(nums, 0, nums.length - 1, n - k + 1);
+        return findKthLargest(nums, 0, nums.length - 1, nums.length - k + 1);
     }
 
     private void swap(int [] nums, int from, int to) {
