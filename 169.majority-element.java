@@ -6,6 +6,7 @@ class Solution {
         if(nums.length == 1) {
             return candidate;
         }
+
         for(int i = 1; i < nums.length; i++) {
             if(nums[i] == candidate) {
                 count++;
@@ -13,7 +14,7 @@ class Solution {
                 count--;
             }
 
-            if(count == 0) {
+            if(count < 0) {
                 candidate = nums[i];
             }
         }
