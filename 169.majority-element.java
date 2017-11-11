@@ -9,15 +9,16 @@ class Solution {
 
         for(int i = 1; i < nums.length; i++) {
 
-            if(count < 0) {
-                candidate = nums[i];
-            }
-            if(nums[i] == candidate) {
+            if(count == 0) {
                 count++;
-            } else {
-                count--;
+                candidate = nums[i];
+            } else{
+                if(nums[i] == candidate) {
+                    count++;
+                } else {
+                    count--;
+                }
             }
-
         }
 
         return candidate;
