@@ -36,7 +36,7 @@ class Solution {
     }
 
     private ListNode reverse(ListNode head) {
-        ListNode pre = null;
+        ListNode prev = null;
 
         while(head != null) {
             ListNode next = head.next;
