@@ -7,21 +7,21 @@ class Solution {
         }
 
         int [] dp = new int[amount + 1];
-        int sum = 1;
+        dp[0] = 0;
 
-        while(sum <= amount) {
+        for(int sum = 1; sum < dp.length; sum++) {
             int min = -1;
             for(int coin : coins) {
-                if(sum >= coin && dp[sum - coin] != -1) {
+                if((sum - coin) >= 0 && dp[sum - coin] != -1) {
                     int temp = dp[sum - coin] + 1;
                     min = min < 0 ? temp : (temp < min ? temp : min);
                 }
 
             }
-            dp[sum] = min;
-            sum++;
 
+            dp[sum] = min;
         }
+
         return dp[amount];
     }
 }
