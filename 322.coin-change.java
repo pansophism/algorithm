@@ -24,5 +24,4 @@ class Solution {
         return dp[amount];
     }
 }
-}
 
