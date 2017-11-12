@@ -6,7 +6,7 @@ class Solution {
             return 0;
         }
 
-        int [] dp = new int[amout + 1];
+        int [] dp = new int[amount + 1];
         int sum = 0;
 
         while(++sum <= amount) {
