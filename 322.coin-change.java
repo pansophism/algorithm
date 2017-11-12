@@ -7,7 +7,7 @@ class Solution {
         }
 
         int [] dp = new int[amount + 1];
-        int sum = 0;
+        int sum = 1;
 
         while(sum <= amount) {
             int min = -1;
