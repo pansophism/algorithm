@@ -1,9 +1,6 @@
 class Solution {
-    public int numDistinct(String s, String t) {
 
-        if(s == null || t == null) {
-            return 0;
-        }
+    public int numDistinct(String s, String t) {
 
         char [] sArr = s.toCharArray();
         char [] tArr = t.toCharArray();
@@ -25,5 +22,7 @@ class Solution {
         }
 
         return dp[sArr.length][tArr.length];
+
     }
 }
+
