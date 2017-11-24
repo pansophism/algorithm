@@ -1,19 +1,10 @@
 class Solution {
 
     public int findKthLargest(int[] a, int k) {
-        int n = a.length;
-        int p = findKthLargest(a, 0, n - 1, n - k + 1);
-        return a[p];
-
+        return a[findKth(a, 0, a.length - 1, a.length - k + 1)];
     }
 
-    private void swap(int [] a, int from, int to) {
-        int t = a[from];
-        a[from] = a[to];
-        a[to] = t;
-    }
-
-    private int findKthLargest(int [] a, int lo, int hi, int k) {
+    private int findKth(int [] a, int lo, int hi, int k) {
 
         int i = lo, j = hi, pivot = a[hi];
 
@@ -30,10 +21,16 @@ class Solution {
         if(m == k) {
             return i;
         } else if(m > k) {
-            return findKthLargest(a, lo, i - 1, k);
+            return findKth(a, lo, i - 1, k);
         } else {
-            return findKthLargest(a, i + 1, hi, k - m);
+            return findKth(a, i + 1, hi, k - m);
         }
+
+    }
+
+    private void swap(int [] a, int i, int j) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
     }
 }
-
