@@ -11,7 +11,6 @@ class Solution {
             }
         }
 
-        // this shouldn't happen
         return null;
     }
 
