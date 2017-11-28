@@ -1,8 +1,13 @@
 import java.util.*;
 
 class Solution {
+    private HashMap<String, List<Integer>> hm = new HashMap<>();
 
     public List<Integer> diffWaysToCompute(String input) {
+        if(hm.containsKey(intput)) {
+            return hm.get(intput);
+        }
+
         List<Integer> res = new LinkedList<>();
 
         for(int i = input.length() - 1; i >= 0; i--) {
@@ -37,6 +42,8 @@ class Solution {
         if(res.size() == 0) {
             res.add(Integer.valueOf(input));
         }
+
+        hm.add(input, res);
 
         return res;
 
