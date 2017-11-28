@@ -2,20 +2,22 @@ class Solution {
 
     public List<Integer> countSmaller(int[] nums) {
 
-        List<Integer> res = new LinkedList<>();
+        int [] ans = new int[nums.length];
 
-        for(int i = 0; i < nums.length; i++) {
-            int t = 0;
-
-            for(int j = i + 1; j < nums.length; j++) {
-                if(nums[j] < nums[i]) {
-                    t++;
+        for(int i = nums.length - 1; i >= 0; i++) {
+            if(i == nums.length - 1) {
+                ans[i] = 0;
+            } else {
+                for(int j = i + 1; j < nums.length; j++) {
+                    if(nums[j] < nums[i]) {
+                        ans[j] = ans[i] + 1;
+                        break;
+                    }
                 }
             }
-
-            res.add(t);
         }
 
-        return res;
+        return Arrays.asList(ans);
     }
+
 }
