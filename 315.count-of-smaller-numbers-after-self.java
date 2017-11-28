@@ -1,29 +1,42 @@
 class Solution {
 
     public List<Integer> countSmaller(int[] nums) {
+        Integer [] ans = new Integer[nums.length];
 
-        int [] ans = new int[nums.length];
+        List<Integer> sorted = new ArrayList<>();
 
         for(int i = nums.length - 1; i >= 0; i--) {
-            if(i == nums.length - 1) {
-                ans[i] = 0;
+            int index = findIndex(sorted, nums[i]);
+
+            ans[i] = index;
+
+            sorted.add(index, nums[i]);
+        }
+
+        return Arrays.asList(ans);
+
+    }
+
+    private int findIndex(List<Integer> sorted, int target) {
+        if(sorted.isEmpty()) {
+            return 0;
+        }
+
+        int start = 0, end = sorted.size() - 1;
+
+        if(sorted.get(end) < target) return end + 1;
+        if(sorted.get(start) >= target) return 0;
+
+        while(start + 1 < end) {
+            int mid = start + (end - start) / 2;
+            if(sorted.get(mid) < target) {
+                start = mid + 1;
             } else {
-                for(int j = i + 1; j < nums.length; j++) {
-                    if(nums[j] < nums[i]) {
-                        ans[i] = ans[j] + 1;
-                        break;
-                    }
-                }
+                end = mid;
             }
         }
 
-        List<Integer> converted = new ArrayList<Integer>();
-
-        for(int i : ans) {
-            converted.add(i);
-        }
-
-        return converted;
+        if(sorted.get(start) >= target) return start;
+        return end;
     }
-
 }
