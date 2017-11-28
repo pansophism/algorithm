@@ -17,9 +17,8 @@ class Solution {
         }
 
         Node root = new Node(nums[nums.length - 1]);
-        count[count.length - 1] = 0;
 
-        for(int i = nums.length - 2; i >= 0; i--) {
+        for(int i = nums.length - 1; i >= 0; i--) {
             count[i] = insert(root, nums[i]);
         }
 
