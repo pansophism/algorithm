@@ -1,36 +1,41 @@
+import java.util.*;
 
 class Solution {
 
     public List<Integer> diffWaysToCompute(String input) {
+        List<Integer> res = new LinkedList<>();
 
-        List<Integer> res = new ArrayList<>();
+        for(int i = input.length() - 1; i >= 0; i--) {
+            if(input.charAt(i) == '-' ||
+                    input.charAt(i) == '*' ||
+                    input.charAt(i) == '+') {
 
-        if(intput == null || input.length == 0) {
-            return res;
+                String part1 = input.substring(0, i);
+                String part2 = input.substring(i + 1);
+
+                List<Integer> part1Ret = diffWaysToCompute(part1);
+                List<Integer> part2Ret = diffWaysToCompute(part2);
+
+                for(Integer p1 : part1Ret) {
+                    for(Integer p2 : part2Ret) {
+                        int c = 0;
+
+                        switch(input.charAt(i)) {
+                            case '+': c = p1 + p2; break;
+                            case '-': c = p1 - p2; break;
+                            case '*': c = p1 * p2; break;
+                        }
+
+                        res.add(c);
+
+                    }
+                }
+
+            }
         }
 
-        int v = (input.charAt(0) - '0');
-        int c = input.charAt(1);
-
-        List<Integer> next = diffWaysToCompute(input.substring(1));
-
-        for(int i : next) {
-            switch(c) {
-                '+' :
-                    res.add(c + i);
-                    break;
-                '-' :
-                    res.add(c - i);
-                    break;
-                '*' :
-                    res.add(c * i);
-                    break;
-                '/' :
-                    res.add(c / i);
-                    break;
-                default:
-                    throw new RuntimeError("this should not happen");
-            }
+        if(res.size() == 0) {
+            res.add(Integer.valueOf(input));
         }
 
         return res;
