@@ -1,42 +1,50 @@
 class Solution {
 
+    private class Node {
+        int val, leftSum = 0, count = 0;
+        Node left, right;
+
+        public Node(int v) {
+            this.val = v;
+        }
+    }
+
     public List<Integer> countSmaller(int[] nums) {
-        Integer [] ans = new Integer[nums.length];
+        Integer [] count = new Integer[nums.length];
 
-        List<Integer> sorted = new ArrayList<>();
-
-        for(int i = nums.length - 1; i >= 0; i--) {
-            int index = findIndex(sorted, nums[i]);
-
-            ans[i] = index;
-
-            sorted.add(index, nums[i]);
+        if(nums == null || nums.length == 0) {
+            return Arrays.asList(count);
         }
 
-        return Arrays.asList(ans);
+        Node root = new Node(nums[nums.length - 1]);
+        count[count.length - 1] = 0;
+
+        for(int i = nums.length - 2; i >= 0; i--) {
+            count[i] = insert(root, nums[i]);
+        }
+
+        return Arrays.asList(count);
 
     }
 
-    private int findIndex(List<Integer> sorted, int target) {
-        if(sorted.isEmpty()) {
-            return 0;
-        }
+    private int insert(Node node, int num) {
+        int sum = 0;
 
-        int start = 0, end = sorted.size() - 1;
-
-        if(sorted.get(end) < target) return end + 1;
-        if(sorted.get(start) >= target) return 0;
-
-        while(start + 1 < end) {
-            int mid = start + (end - start) / 2;
-            if(sorted.get(mid) < target) {
-                start = mid + 1;
+        while(node.val != num) {
+            if(node.val > num) {
+                if(node.left == null) node.left = new Node(num);
+                node.leftSum++;
+                node = node.left;
             } else {
-                end = mid;
+                sum += node.leftSum + node.count;
+                if(node.right == null) node.right = new Node(num);
+                node = node.right;
             }
         }
 
-        if(sorted.get(start) >= target) return start;
-        return end;
+        node.count++;
+
+        return sum + node.leftSum;
     }
 }
+
