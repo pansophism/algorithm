@@ -4,8 +4,8 @@ class Solution {
     private HashMap<String, List<Integer>> hm = new HashMap<>();
 
     public List<Integer> diffWaysToCompute(String input) {
-        if(hm.containsKey(intput)) {
-            return hm.get(intput);
+        if(hm.containsKey(input)) {
+            return hm.get(input);
         }
 
         List<Integer> res = new LinkedList<>();
