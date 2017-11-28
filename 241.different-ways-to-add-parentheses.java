@@ -43,7 +43,7 @@ class Solution {
             res.add(Integer.valueOf(input));
         }
 
-        hm.add(input, res);
+        hm.put(input, res);
 
         return res;
 
