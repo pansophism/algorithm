@@ -1,51 +1,69 @@
 class Solution {
 
-    private class Node {
-        int val, leftSum = 0, count = 0;
-        Node left, right;
-
-        public Node(int v) {
-            this.val = v;
-        }
-    }
-
     public List<Integer> countSmaller(int[] nums) {
-        Integer [] count = new Integer[nums.length];
+        NumberIndex[] cnums = new NumberIndex[nums.length];
 
-        if(nums == null || nums.length == 0) {
-            return Arrays.asList(count);
+        for(int i = 0; i < nums.length; i++) {
+            cnums[i] = new NumberIndex(nums[i], i);
         }
 
-        Node root = new Node(nums[nums.length - 1]);
-        root.count = 1;
-        count[count.length - 1] = 0;
+        int [] smaller = new int[nums.length];
+        cnums = sort(cnums, smaller);
 
-        for(int i = nums.length - 2; i >= 0; i--) {
-            count[i] = insert(root, nums[i]);
+        List<Integer> res = new ArrayList<>();
+        for(int i : smaller) {
+            res.add(i);
         }
 
-        return Arrays.asList(count);
-
+        return res;
     }
 
-    private int insert(Node node, int num) {
-        int sum = 0;
+    private NumberIndex[] sort(NumberIndex [] nums, int [] smaller) {
+        int half = nums.length / 2;
 
-        while(node.val != num) {
-            if(node.val > num) {
-                if(node.left == null) node.left = new Node(num);
-                node.leftSum++;
-                node = node.left;
-            } else {
-                sum += node.leftSum + node.count;
-                if(node.right == null) node.right = new Node(num);
-                node = node.right;
+        if(half > 0) {
+            NumberIndex [] rightPart = new NumberIndex[nums.length - half];
+            NumberIndex [] leftPart = new NumberIndex[half];
+
+            for(int i = 0; i < leftPart.length; i++) {
+                leftPart[i] = new NumberIndex(nums[i]);
+            }
+
+            for(int i = 0; i < rightPart.length; i++) {
+                rightPart[i] = new NumberIndex(nums[half + i]);
+            }
+
+            NumberIndex[] left = sort(leftPart, smaller), right = sort(rightPart, smaller);
+
+            int m = left.length, n = right.length, i = 0, j = 0;
+
+            while(i < m || j < n) {
+                if(j == n || i < m && left[i].number <= right[j].number) {
+                    nums[i + j] = left[i];
+                    smaller[left[i].index] += j;
+                    i++;
+                } else {
+                    nums[i + j] = right[j];
+                    j++;
+                }
             }
         }
 
-        node.count++;
+        return nums;
+    }
 
-        return sum + node.leftSum;
+    class NumberIndex {
+        int number;
+        int index;
+
+        NumberIndex(int number, int index) {
+            this.number = number;
+            this.index = index;
+        }
+
+        NumberIndex(NumberIndex ni) {
+            this.number = ni.number;
+            this.index = ni.index;
+        }
     }
 }
-
