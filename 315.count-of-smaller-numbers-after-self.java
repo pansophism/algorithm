@@ -8,7 +8,7 @@ class Solution {
         }
 
         int [] smaller = new int[nums.length];
-        cnums = sort(cnums, smaller);
+        sort(cnums, smaller);
 
         List<Integer> res = new ArrayList<>();
         for(int i : smaller) {
@@ -18,7 +18,7 @@ class Solution {
         return res;
     }
 
-    private NumberIndex[] sort(NumberIndex [] nums, int [] smaller) {
+    private void sort(NumberIndex [] nums, int [] smaller) {
         int half = nums.length / 2;
 
         if(half > 0) {
@@ -48,8 +48,6 @@ class Solution {
                 }
             }
         }
-
-        return nums;
     }
 
     class NumberIndex {
