@@ -1,0 +1,14 @@
+[23] Merge k Sorted Lists  
+
+https://leetcode.com/problems/merge-k-sorted-lists
+
+* algorithms
+* Hard (27.75%)
+* Source Code:       23.merge-k-sorted-lists.java
+* Total Accepted:    185.6K
+* Total Submissions: 668.7K
+* Testcase Example:  '[]'
+
+
+Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
+
