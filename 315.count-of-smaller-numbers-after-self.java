@@ -1,69 +1,47 @@
-class Solution {
+public class Solution {
 
-    public List<Integer> countSmaller(int[] nums) {
-        NumberIndex[] cnums = new NumberIndex[nums.length];
+	public List<Integer> countSmaller(int[] nums) {
+		int n = nums.length;
+		if (n == 0) {
+			return new ArrayList<>();
+		}
 
-        for(int i = 0; i < nums.length; i++) {
-            cnums[i] = new NumberIndex(nums[i], i);
-        }
+		int minVal = Integer.MAX_VALUE;
+		int maxVal = Integer.MIN_VALUE;
 
-        int [] smaller = new int[nums.length];
-        cnums = sort(cnums, smaller);
+		for (int num : nums) {
+			minVal = Math.min(minVal, num);
+		}
 
-        List<Integer> res = new ArrayList<>();
-        for(int i : smaller) {
-            res.add(i);
-        }
+		int[] nums2 = new int[n];
 
-        return res;
-    }
+		for (int i = 0; i < n; i++) {
+			nums2[i] = nums[i] - minVal + 1;
+			maxVal = Math.max(nums2[i], maxVal);
+		}
 
-    private NumberIndex[] sort(NumberIndex [] nums, int [] smaller) {
-        int half = nums.length / 2;
+		int[] tree = new int[maxVal + 1];
+		Integer[] ansArray = new Integer[n];
 
-        if(half > 0) {
-            NumberIndex [] rightPart = new NumberIndex[nums.length - half];
-            NumberIndex [] leftPart = new NumberIndex[half];
+		for (int i = n - 1; i >= 0; i--) {
+			ansArray[i] = get(nums2[i] - 1, tree);
+			update(nums2[i], tree);
+		}
 
-            for(int i = 0; i < leftPart.length; i++) {
-                leftPart[i] = new NumberIndex(nums[i]);
-            }
+		return Arrays.asList(ansArray);
+	}
+	private void update(int min, int[] tree) {
+		for (int i = min; i < tree.length; i += (i & (-i))) {
+			tree[i]++;
+		}
+	}
 
-            for(int i = 0; i < rightPart.length; i++) {
-                rightPart[i] = new NumberIndex(nums[half + i]);
-            }
-
-            NumberIndex[] left = sort(leftPart, smaller), right = sort(rightPart, smaller);
-
-            int m = left.length, n = right.length, i = 0, j = 0;
-
-            while(i < m || j < n) {
-                if(j == n || i < m && left[i].number <= right[j].number) {
-                    nums[i + j] = left[i];
-                    smaller[left[i].index] += j;
-                    i++;
-                } else {
-                    nums[i + j] = right[j];
-                    j++;
-                }
-            }
-        }
-
-        return nums;
-    }
-
-    class NumberIndex {
-        int number;
-        int index;
-
-        NumberIndex(int number, int index) {
-            this.number = number;
-            this.index = index;
-        }
-
-        NumberIndex(NumberIndex ni) {
-            this.number = ni.number;
-            this.index = ni.index;
-        }
-    }
+	private int get(int max, int[] tree) {
+		int sum = 0;
+		for (int i = max; i > 0; i -= (i & (-i))) {
+			sum += tree[i];
+		}
+		return sum;
+	}
 }
+
