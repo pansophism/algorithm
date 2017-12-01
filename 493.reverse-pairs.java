@@ -2,8 +2,9 @@
 // find the number of important reverse pairs with the first element of the pair coming from the left subarray nums[0, m] while the second element of the pair coming from the right subarray nums[m + 1, n - 1]
 
 public class Solution {
-    public int res;
-    public int[] temp;  // for merge
+
+    private int res;
+    private int[] temp;  // for merge
 
     public int reversePairs(int[] nums) {
         res = 0;
