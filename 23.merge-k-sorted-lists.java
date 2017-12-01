@@ -29,11 +29,11 @@ class Solution {
         if(l2 == null) return l1;
 
         if(l1.val > l2.val) {
-            ListNode temp = new ListNode(l2.val);
+            ListNode temp = l2;
             temp.next = merge(l1, l2.next);
             return temp;
         } else {
-            ListNode temp = new ListNode(l1.val);
+            ListNode temp = l1;
             temp.next = merge(l1.next, l2);
             return temp;
         }
