@@ -3,7 +3,7 @@ class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int len1 = nums1.length, len2 = nums2.length;
 
-        if(((len1 + len2) % 2) == 1) {
+        if(((len1 + len2) & 1) == 1) {
             // if odd number, pick the mid
             return findKth(nums1, 0, len1, nums2, 0, len2, (len1 + len2) / 2 + 1);
         } else {
