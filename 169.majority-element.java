@@ -12,7 +12,7 @@ class Solution {
             if(count == 0) {
                 count++;
                 candidate = nums[i];
-            } else{
+            } else {
                 if(nums[i] == candidate) {
                     count++;
                 } else {
