@@ -4,6 +4,7 @@ public class Solution {
         if (nums == null || nums.length == 0) {
             return 0;
         }
+
         int n = nums.length;
         long[] sums = new long[n + 1];
         for (int i = 1; i <= n; i++) {
@@ -32,10 +33,12 @@ public class Solution {
         for (int i = start; i <= end; i++) {
             aux[i] = sums[i];
         }
+
         int i = start, j = mid + 1, k = mid + 1, l = mid + 1, m = start;
+
         while (i <= mid || j <= end) {
             while (i <= mid &&  k <= end && aux[k] - aux[i] < lower) {
-                k++;    // find first element that is  valid for the lower bound
+                k++;    // find first element that is valid for the lower bound
             }
             while (i <= mid &&  l <= end && aux[l] - aux[i] <= upper) {
                 l++; // find first element that is larger than the upper bound
