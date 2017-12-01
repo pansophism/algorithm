@@ -20,9 +20,7 @@ public class QuickSort {
             while(nums[j] > pivot) j--;
 
             if(i <= j) {
-                swap(nums, i, j);
-                j--;
-                i++;
+                swap(nums, i++, j--);
             }
         }
 
