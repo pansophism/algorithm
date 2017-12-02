@@ -1,5 +1,28 @@
 
 class Solution {
+
+	public List<int[]> getSkyline(int[][] buildings) {
+		if (buildings == null) return null;
+
+		final int n = buildings.length;
+		if (n < 1) return Collections.emptyList();
+		final List<int[]> result = new ArrayList<>(2 * n);
+		int[] building = buildings[0];
+		Node head = getHead(new Node(), building[0], building[1], building[2]);
+
+		for (int i = 1; i < n; i++) {
+			building = buildings[i];
+			head = merge(result, head, building[0], building[1], building[2]);
+		}
+
+		while(head != null) {
+			addResult(result, head.x, head.y);
+			head = head.next;
+		}
+
+		return result;
+	}
+
 	static class Node {
 		int x, y;
 		Node next;
@@ -27,6 +50,7 @@ class Solution {
 		}
 
 		final Node next = head.next;
+
 		if (null == next)
 			return getHead(head, x1, x2, y);
 		else if (x1 >= next.x)  // below next != null
@@ -54,22 +78,4 @@ class Solution {
 		}
 	}
 
-	public List<int[]> getSkyline(int[][] buildings) {
-		if (buildings == null) return null;
-		final int n = buildings.length;
-		if (n < 1) return Collections.emptyList();
-		final List<int[]> result = new ArrayList<>(2 * n);
-		int[] building = buildings[0];
-		Node head = getHead(new Node(), building[0], building[1], building[2]);
-		for (int i = 1; i < n; i++) {
-			building = buildings[i];
-			head = merge(result, head, building[0], building[1], building[2]);
-		}
-		while(head != null) {
-			addResult(result, head.x, head.y);
-			head = head.next;
-		}
-		return result;
-	}
 }
-
