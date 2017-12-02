@@ -2,19 +2,17 @@
 class Solution {
 
     public ListNode mergeKLists(ListNode[] lists) {
-        return partition(lists, 0, lists.length - 1);
+        return split(lists, 0, list.length - 1);
     }
 
-    private ListNode partition(ListNode[] lists, int lo, int hi) {
+    private ListNode split(ListNode [] lists, int lo, int hi) {
         if(lo == hi) {
             return lists[lo];
-        }
-
-        if(lo < hi) {
+        } else if(lo < hi) {
             int mid = lo + (hi - lo) / 2;
 
-            ListNode l1 = partition(lists, lo, mid);
-            ListNode l2 = partition(lists, mid + 1, hi);
+            ListNode l1 = split(lists, lo, mid);
+            ListNode l2 = split(lists, mid + 1, hi);
 
             return merge(l1, l2);
         }
