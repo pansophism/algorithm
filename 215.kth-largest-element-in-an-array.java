@@ -1,36 +1,49 @@
 
 class Solution {
 
-    public int findKthLargest(int[] a, int k) {
-        return findKth(a, 0, a.length - 1, a.length - k + 1);
+    public int findKthLargest(int[] nums, int k) {
+        if(nums == null || nums.length == 0 || k <= 0 || k > nums.length) {
+            return 0;
+        }
+
+        return select(nums, 0, nums.length - 1, nums.length - k);
     }
 
-    private int findKth(int [] a, int lo, int hi, int k) {
+    private int select(int [] nums, int left, int right, int k) {
+        if(left == right) {
+            return nums[left];
+        }
 
-        int i = lo, j = hi, pivot = a[hi];
+        int pivotIndex = partition(nums, left, right);
+
+        if(pivotIndex == k) {
+            return nums[pivotIndex];
+        } else if(pivotIndex < k) {
+            return select(nums, pivotIndex + 1, right, k);
+        } else {
+            return select(nums, left, pivotIndex - 1, k);
+        }
+
+    }
+
+    private int partition(int [] nums, int left, int right) {
+
+        int i = left, j = right, pivot = nums[right];
 
         while(i < j) {
-            if(a[i++] > pivot) {
-                swap(a, --i, --j);
+            if(nums[i++] > pivot) {
+                swap(nums, --i, --j);
             }
         }
 
-        swap(a, i, hi);
+        swap(nums, i, right);
 
-        int m = i - lo + 1;
-
-        if(m == k) {
-            return a[i];
-        } else if(m > k) {
-            return findKth(a, lo, i - 1, k);
-        } else {
-            return findKth(a, i + 1, hi, k - m);
-        }
+        return i;
     }
 
-    private void swap(int [] a, int i, int j) {
-        int temp = a[i];
-        a[i] = a[j];
-        a[j] = temp;
+    private void swap(int [] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
