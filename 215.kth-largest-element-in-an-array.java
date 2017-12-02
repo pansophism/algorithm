@@ -30,7 +30,7 @@ class Solution {
 
         int i = left, j = right;
 
-		swap(nums, right, Math.random() * (right - left) + left + 1);
+		swap(nums, right, (int)(Math.random() * (right - left) + left + 1));
 
 		int pivot = nums[right];
 
