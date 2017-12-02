@@ -7,7 +7,7 @@ class Solution {
             if(count == 0) {
                 candidate = nums[i];
             } else {
-                if(candidate = nums[i]) {
+                if(candidate == nums[i]) {
                     count++;
                 } else {
                     count--;
