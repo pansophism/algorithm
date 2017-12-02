@@ -11,7 +11,7 @@ class Solution {
         }
 
         if(lo < hi) {
-            int mid = lo + (hi - mid) / 2;
+            int mid = lo + (hi - lo) / 2;
 
             ListNode l1 = partition(lists, lo, mid);
             ListNode l2 = partition(lists, mid + 1, hi);
