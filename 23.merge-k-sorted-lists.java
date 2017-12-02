@@ -2,7 +2,7 @@
 class Solution {
 
     public ListNode mergeKLists(ListNode[] lists) {
-        return split(lists, 0, list.length - 1);
+        return split(lists, 0, lists.length - 1);
     }
 
     private ListNode split(ListNode [] lists, int lo, int hi) {
