@@ -28,7 +28,11 @@ class Solution {
 
     private int partition(int [] nums, int left, int right) {
 
-        int i = left, j = right, pivot = nums[right];
+        int i = left, j = right;
+
+		swap(nums, right, Math.random() * (right - left) + left + 1);
+
+		int pivot = nums[right];
 
         while(i < j) {
             if(nums[i++] > pivot) {
