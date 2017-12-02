@@ -1,7 +1,8 @@
+
 class Solution {
 
     public int findKthLargest(int[] a, int k) {
-        return a[findKth(a, 0, a.length - 1, a.length - k + 1)];
+        return findKth(a, 0, a.length - 1, a.length - k + 1);
     }
 
     private int findKth(int [] a, int lo, int hi, int k) {
@@ -19,13 +20,12 @@ class Solution {
         int m = i - lo + 1;
 
         if(m == k) {
-            return i;
+            return a[i];
         } else if(m > k) {
             return findKth(a, lo, i - 1, k);
         } else {
             return findKth(a, i + 1, hi, k - m);
         }
-
     }
 
     private void swap(int [] a, int i, int j) {
