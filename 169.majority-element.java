@@ -9,7 +9,11 @@ class Solution {
                 candidate = nums[i];
                 count++;
             } else {
-                count--;
+                if(nums[i] == cadidate) {
+                    count++;
+                } else {
+                    count--;
+                }
             }
         }
 
