@@ -2,17 +2,16 @@
 class Solution {
 
     public ListNode mergeKLists(ListNode[] lists) {
-
         return partition(lists, 0, lists.length - 1);
     }
 
-    public ListNode partition(ListNode[] lists, int lo, int hi) {
+    private ListNode partition(ListNode[] lists, int lo, int hi) {
         if(lo == hi) {
             return lists[lo];
         }
 
         if(lo < hi) {
-            int mid = lo + (hi - lo) / 2;
+            int mid = lo + (hi - mid) / 2;
 
             ListNode l1 = partition(lists, lo, mid);
             ListNode l2 = partition(lists, mid + 1, hi);
@@ -20,7 +19,6 @@ class Solution {
             return merge(l1, l2);
         }
 
-        // this should never happen
         return null;
     }
 
@@ -28,15 +26,14 @@ class Solution {
         if(l1 == null) return l2;
         if(l2 == null) return l1;
 
-        if(l1.val > l2.val) {
-            ListNode temp = l2;
-            temp.next = merge(l1, l2.next);
-            return temp;
-        } else {
+        if(l1.val < l2.val) {
             ListNode temp = l1;
             temp.next = merge(l1.next, l2);
+            return temp;
+        } else {
+            ListNode temp = l2;
+            temp.next = merge(l1, l2.next);
             return temp;
         }
     }
 }
-
