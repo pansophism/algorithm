@@ -8,11 +8,10 @@ public class Solution {
 	}
 
 	private int countOnly(int [] nums, int lo, int mid, int hi) {
-		int i = lo, j = mid + 1, ans = 0, count = 0;
-		// if left element > 2 * right element then count ++
+		int ans = 0, count = 0;
 
-		while(i <= mid) {
-			if(j > hi || (long)nums[i] <= 2 * (long)nums[j]) {
+		for(int i = lo, j = mid + 1; i <= mid;) {
+			if(j > hi || nums[i] <= 2 * nums[j]) {
 				i++;
 				ans += count;
 			} else {
@@ -22,7 +21,6 @@ public class Solution {
 		}
 
 		return ans;
-
 	}
 
 	private int countAndMergeSort(int [] nums, int [] temp, int lo, int hi) {
