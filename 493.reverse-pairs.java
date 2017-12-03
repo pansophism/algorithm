@@ -1,55 +1,66 @@
 
 public class Solution {
 
-    private int res;
-    private int[] temp;  // for merge
+	public int reversePairs(int[] nums) {
+		int [] temp = new int[nums.length];
 
-    public int reversePairs(int[] nums) {
-        res = 0;
-        temp = new int[nums.length];
-        mergeSort(nums, 0, nums.length - 1);
-        return res;
-    }
+		return countAndMergeSort(nums, temp, 0, nums.length - 1);
+	}
 
-    public void mergeSort(int[] nums, int start, int end) {
-        if (start >= end) {
-            return;
-        }
+	private int countOnly(int [] nums, int lo, int mid, int hi) {
+		int i = lo, j = mid + 1, ans = 0, count = 0;
+		// if left element > 2 * right element then count ++
 
-        int mid = start + (end - start) / 2;
-        mergeSort(nums, start, mid);
-        mergeSort(nums, mid + 1, end);
+		while(i <= mid) {
+			if(j > hi || (long)nums[i] <= 2 * (long)nums[j]) {
+				i++;
+				ans += count;
+			} else {
+				j++;
+				count++;
+			}
+		}
 
-        int count = 0;
-        int left = start, right = mid + 1;
-        while (left <= mid) {
-            if (right > end || (long)nums[left] <= 2 * (long)nums[right]) {
-                left++;
-                res += count;
-            } else {
-                right++;
-                count++;
-            }
-        }
+		return ans;
 
-        left = start; right = mid + 1;
-        int index = start;
-        while (left <= mid && right <= end) {
-            if (nums[left] < nums[right]) {
-                temp[index++] = nums[left++];
-            } else {
-                temp[index++] = nums[right++];
-            }
-        }
-        while (left <= mid) {
-            temp[index++] = nums[left++];
-        }
-        while (right <= end) {
-            temp[index++] = nums[right++];
-        }
+	}
 
-        for (index = start; index <= end; index++) {
-            nums[index] = temp[index];
-        }
-    }
+	private int countAndMergeSort(int [] nums, int [] temp, int lo, int hi) {
+		if(lo >= hi) {
+			return 0;
+		}
+
+		int mid = lo + (hi - lo) / 2;
+
+		int lCount = countAndMergeSort(nums, temp, lo, mid);
+		int rCount = countAndMergeSort(nums, temp, mid + 1, hi);
+
+		// count
+		int count = countOnly(nums, lo, mid, hi);
+
+		// merge
+		int i = lo, j = mid + 1, k = lo;
+		while(i <= mid && j <= hi) {
+			if(nums[i] < nums[j]) {
+				temp[k++] = nums[i++];
+			} else {
+				temp[k++] = nums[j++];
+			}
+		}
+
+		while(i <= mid) {
+			temp[k++] = nums[i++];
+		}
+
+		while(j <= hi) {
+			temp[k++] = nums[j++];
+		}
+
+		for(int a = lo; a <= hi; a++) {
+			nums[a] = temp[a];
+		}
+
+		return lCount + count + rCount;
+	}
+
 }
