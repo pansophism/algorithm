@@ -1,9 +1,13 @@
 
 class Solution {
 
+    private Map<String, List<Integer>> cache = new HashMap<>();
+
     public List<Integer> diffWaysToCompute(String input) {
 
-        Map<String, List<Integer>> cache = new HashMap<>();
+        if(cache.containsKey(input)) {
+            return cache.get(input);
+        }
 
         List<Integer> res = new LinkedList<>();
         for(int i = input.length() - 1; i >= 0; i--) {
