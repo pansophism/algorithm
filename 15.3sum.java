@@ -14,24 +14,28 @@ class Solution {
         for(int i = 0; i < nums.length - 2; i++) {
 
             if(i == 0 || nums[i] != nums[i - 1]) {
-                // int target = 0 - nums[i];
+                int target = 0 - nums[i];
 
-                for(int j = i + 1; j < nums.length - 1; j++) {
-                    for(int k = j + 1; k < nums.length; k++) {
-                        if(nums[i] + nums[j] + nums[k] == 0) {
-                            List<Integer> oneEntry = new LinkedList<>();
-                            oneEntry.add(nums[i]);
-                            oneEntry.add(nums[j]);
-                            oneEntry.add(nums[k]);
+                int j = i + 1, k = nums.length - 1;
 
-                            results.add(oneEntry);
-                        }
+                while(j < k) {
+                    if(nums[j] + nums[k] > target) {
+                        k--;
+                    } else if(nums[j] + nums[k] < target) {
+                        j++;
+                    } else {
+                        List<Integer> oneEntry = new LinkedList<>();
+                        oneEntry.add(nums[i]);
+                        oneEntry.add(nums[j]);
+                        oneEntry.add(nums[k]);
+                        results.add(oneEntry);
+                        break;
                     }
                 }
             }
-
         }
 
         return results;
     }
+
 }
