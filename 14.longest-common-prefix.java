@@ -13,7 +13,7 @@ class Solution {
             }
         }
 
-        for(int i = minStr.length() - 1; i > 0; i--) {
+        for(int i = minStr.length() - 1; i >= 0; i--) {
 
             String candidate = minStr.substring(0, i + 1);
             if(fitAll(strs, candidate)) {
