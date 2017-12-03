@@ -15,17 +15,10 @@ class Solution {
 
                 for(int lr : leftRes) {
                     for(int rr : rightRes) {
-                        switch(input.charAt(i)) {
-                            case '+' :
-                                res.add(lr + rr);
-                                break;
-                            case '*' :
-                                res.add(lr * rr);
-                                break;
-                            case '-' :
-                                res.add(lr - rr);
-                                break;
-                        }
+                        res.add(
+                                input.charAt(i) == '+' ? lr + rr :
+                                input.charAt(i) == '-' ? lr - rr :
+                                lr * rr);
                     }
                 }
             }
