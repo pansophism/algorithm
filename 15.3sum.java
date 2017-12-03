@@ -16,24 +16,28 @@ class Solution {
             if(i == 0 || nums[i] != nums[i - 1]) {
                 int target = 0 - nums[i];
 
-                int j = i + 1, k = nums.length - 1;
+                int l = i + 1, r = nums.length - 1;
 
-                while(j < k) {
-                    if(nums[j] + nums[k] > target) {
-                        k--;
-                    } else if(nums[j] + nums[k] < target) {
-                        j++;
+                while(l < r) {
+                    if(nums[l] + nums[r] > target) {
+                        r--;
+                    } else if(nums[l] + nums[r] < target) {
+                        l++;
                     } else {
                         List<Integer> oneEntry = new LinkedList<>();
                         oneEntry.add(nums[i]);
-                        oneEntry.add(nums[j]);
-                        oneEntry.add(nums[k]);
+                        oneEntry.add(nums[l]);
+                        oneEntry.add(nums[r]);
                         results.add(oneEntry);
-                        j++;
-                        k--;
+                        r++;
+                        l--;
 
-                        while(j < k && nums[j] == nums[j - 1]) j++;
-                        while(j < k && k <= nums.length - 1 && nums[k] == nums[k + 1]) j++;
+                        while(l < r && nums[l] == nums[l - 1]) {
+                            l++;
+                        }
+                        while(l < r && r < nums.length - 1 && nums[r] == nums[r + 1]) {
+                            r--;
+                        }
                     }
                 }
             }
