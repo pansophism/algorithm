@@ -5,12 +5,13 @@ class Solution {
         return split(lists, 0, lists.length - 1);
     }
 
-    private ListNode split(ListNode [] lists, int lo, int hi) {
+    private ListNode split(ListNode[] lists, int lo, int hi) {
         if(lo == hi) {
             return lists[lo];
-        } else if(lo < hi) {
-            int mid = lo + (hi - lo) / 2;
+        }
 
+        if(lo < hi) {
+            int mid = lo + (hi - lo) / 2;
             ListNode l1 = split(lists, lo, mid);
             ListNode l2 = split(lists, mid + 1, hi);
 
