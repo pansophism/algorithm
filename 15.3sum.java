@@ -29,7 +29,8 @@ class Solution {
                         oneEntry.add(nums[j]);
                         oneEntry.add(nums[k]);
                         results.add(oneEntry);
-                        break;
+                        j++;
+                        k--;
                     }
                 }
             }
