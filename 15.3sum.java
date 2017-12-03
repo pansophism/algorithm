@@ -7,7 +7,9 @@ class Solution {
 
         Arrays.sort(nums);
 
-        for(int i = 0; i < nums.length - 2; i++) {
+        int n = nums.length;
+
+        for(int i = 0; i < n - 2; i++) {
 
             if(i > 0 && nums[i] == nums[i - 1]) {
                 continue;
@@ -15,7 +17,7 @@ class Solution {
 
             int target = 0 - nums[i];
 
-            int l = i + 1, r = nums.length - 1;
+            int l = i + 1, r = n - 1;
 
             while(l < r) {
                 if(nums[l] + nums[r] == target) {
@@ -26,7 +28,7 @@ class Solution {
                     while(l < r && nums[l] == nums[l - 1]) {
                         l++;
                     }
-                    while(l < r && r < nums.length - 1 && nums[r] == nums[r + 1]) {
+                    while(l < r && r < n - 1 && nums[r] == nums[r + 1]) {
                         r--;
                     }
                 } else if(nums[l] + nums[r] > target) {
