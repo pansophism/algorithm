@@ -1,0 +1,13 @@
+[14] Longest Common Prefix  
+
+https://leetcode.com/problems/longest-common-prefix
+
+* algorithms
+* Easy (31.55%)
+* Source Code:       14.longest-common-prefix.java
+* Total Accepted:    224.3K
+* Total Submissions: 710.8K
+* Testcase Example:  '[]'
+
+Write a function to find the longest common prefix string amongst an array of strings.
+
