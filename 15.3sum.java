@@ -19,11 +19,6 @@ class Solution {
                 int j = i + 1, k = nums.length - 1;
 
                 while(j < k) {
-                    if(nums[j] == nums[j - 1]) {
-                        j++;
-                        continue;
-                    }
-
                     if(nums[j] + nums[k] > target) {
                         k--;
                     } else if(nums[j] + nums[k] < target) {
@@ -36,6 +31,9 @@ class Solution {
                         results.add(oneEntry);
                         j++;
                         k--;
+
+                        while(j < k && nums[j] == nums[j - 1]) j++;
+                        while(j < k && k <= nums.length - 1 && nums[k] == nums[k + 1]) j++;
                     }
                 }
             }
