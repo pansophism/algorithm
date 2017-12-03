@@ -2,6 +2,7 @@
 class Solution {
 
 	public int findKthLargest(int[] nums, int k) {
+
 		return findKth(nums, 0, nums.length - 1, nums.length - k);
 	}
 
@@ -28,7 +29,7 @@ class Solution {
 		int pivot = nums[hi], i = lo, j = hi;
 
 		while(i < j) {
-			if(nums[i++] > nums[j]) {
+			if(nums[i++] > pivot) {
 				swap(nums, --i, --j);
 			}
 		}
