@@ -13,7 +13,7 @@ class Solution {
 
             for(char c1 : letters.toCharArray()) {
                 for(String s : results) {
-                    newResults.add(s + " " + c1);
+                    newResults.add(s + "" + c1);
                 }
             }
 
