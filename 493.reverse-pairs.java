@@ -11,7 +11,7 @@ public class Solution {
 		int ans = 0, count = 0;
 
 		for(int i = lo, j = mid + 1; i <= mid;) {
-			if(j > hi || nums[i] <= 2 * nums[j]) {
+			if(j > hi || (long)nums[i] <= (long)(2 * nums[j])) {
 				i++;
 				ans += count;
 			} else {
