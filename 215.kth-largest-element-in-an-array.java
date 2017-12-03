@@ -1,53 +1,46 @@
 
 class Solution {
 
-    public int findKthLargest(int[] nums, int k) {
-        if(nums == null || nums.length == 0 || k <= 0 || k > nums.length) {
-            return 0;
-        }
+	public int findKthLargest(int[] nums, int k) {
+		return findKth(nums, 0, nums.length - 1, nums.length - k);
+	}
 
-        return select(nums, 0, nums.length - 1, nums.length - k);
-    }
+	private int findKth(int [] nums, int lo, int hi, int k) {
+		if(lo == hi) {
+			return nums[lo];
+		}
 
-    private int select(int [] nums, int left, int right, int k) {
-        if(left == right) {
-            return nums[left];
-        }
+		int p = partition(nums, lo, hi);
 
-        int pivotIndex = partition(nums, left, right);
+		if(p == k) {
+			return nums[k];
+		} else if(p > k) {
+			return findKth(nums, lo, p - 1, k);
+		} else {
+			return findKth(nums, p + 1, hi, k);
+		}
+	}
 
-        if(pivotIndex == k) {
-            return nums[pivotIndex];
-        } else if(pivotIndex < k) {
-            return select(nums, pivotIndex + 1, right, k);
-        } else {
-            return select(nums, left, pivotIndex - 1, k);
-        }
+	private int partition(int [] nums, int lo, int hi) {
 
-    }
+		swap(nums, (int)(Math.random() * (hi - lo) + lo + 1), hi);
 
-    private int partition(int [] nums, int left, int right) {
+		int pivot = nums[hi], i = lo, j = hi;
 
-        int i = left, j = right, mid = left + (right - left) / 2;
+		while(i < j) {
+			if(nums[i++] > nums[j]) {
+				swap(nums, --i, --j);
+			}
+		}
 
-		swap(nums, right, mid);
+		swap(nums, i, hi);
 
-		int pivot = nums[right];
+		return i;
+	}
 
-        while(i < j) {
-            if(nums[i++] > pivot) {
-                swap(nums, --i, --j);
-            }
-        }
-
-        swap(nums, i, right);
-
-        return i;
-    }
-
-    private void swap(int [] nums, int i, int j) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
-    }
+	private void swap(int [] nums, int i, int j) {
+		int temp = nums[i];
+		nums[i] = nums[j];
+		nums[j] = temp;
+	}
 }
