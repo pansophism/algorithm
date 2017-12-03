@@ -1,51 +1,42 @@
-import java.util.*;
 
 class Solution {
-    private HashMap<String, List<Integer>> hm = new HashMap<>();
 
     public List<Integer> diffWaysToCompute(String input) {
-        if(hm.containsKey(input)) {
-            return hm.get(input);
-        }
+
+        Map<String, List<Integer>> cache = new HashMap<>();
 
         List<Integer> res = new LinkedList<>();
-
         for(int i = input.length() - 1; i >= 0; i--) {
-            if(input.charAt(i) == '-' ||
-                    input.charAt(i) == '*' ||
-                    input.charAt(i) == '+') {
 
-                String part1 = input.substring(0, i);
-                String part2 = input.substring(i + 1);
+            if(input.charAt(i) == '*' || input.charAt(i) == '+' || input.charAt(i) == '-') {
 
-                List<Integer> part1Ret = diffWaysToCompute(part1);
-                List<Integer> part2Ret = diffWaysToCompute(part2);
+                List<Integer> leftRes = diffWaysToCompute(input.substring(0, i));
+                List<Integer> rightRes = diffWaysToCompute(input.substring(i + 1));
 
-                for(Integer p1 : part1Ret) {
-                    for(Integer p2 : part2Ret) {
-                        int c = 0;
-
+                for(int lr : leftRes) {
+                    for(int rr : rightRes) {
                         switch(input.charAt(i)) {
-                            case '+': c = p1 + p2; break;
-                            case '-': c = p1 - p2; break;
-                            case '*': c = p1 * p2; break;
+                            case '+' :
+                                res.add(lr + rr);
+                                break;
+                            case '*' :
+                                res.add(lr * rr);
+                                break;
+                            case '-' :
+                                res.add(lr - rr);
+                                break;
                         }
-
-                        res.add(c);
-
                     }
                 }
-
             }
         }
 
         if(res.size() == 0) {
-            res.add(Integer.valueOf(input));
+            res.add(Integer.parseInt(input));
         }
 
-        hm.put(input, res);
+        cache.put(input, res);
 
         return res;
-
     }
 }
