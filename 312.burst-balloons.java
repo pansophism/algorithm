@@ -1,24 +1,38 @@
 class Solution {
 
     public int maxCoins(int[] iNums) {
-        int[] nums = new int[iNums.length + 2];
-        int n = 1;
-        for (int x : iNums) if (x > 0) nums[n++] = x;
-        nums[0] = nums[n++] = 1;
+        int [] newArray = new int[iNums.length + 2];
+        newArray[0] = 1;
+        newArray[newArray.length - 1] = 1;
 
-        int[][] memo = new int[n][n];
-        return burst(memo, nums, 0, n - 1);
+        for(int i = 1; i <= iNums.length; i++) {
+            newArray[i] = iNums[i - 1];
+        }
+
+        int [][] dp = new int[iNums.length + 2][iNums.length + 2];
+
+        return burst(dp, newArray, 0, newArray.length - 1);
     }
 
-    public int burst(int[][] memo, int[] nums, int left, int right) {
-        if (left + 1 == right) return 0;
-        if (memo[left][right] > 0) return memo[left][right];
-        int ans = 0;
-        for (int i = left + 1; i < right; ++i)
-            ans = Math.max(ans, nums[left] * nums[i] * nums[right]
-                    + burst(memo, nums, left, i) + burst(memo, nums, i, right));
-        memo[left][right] = ans;
-        return ans;
-    }
+    private int burst(int [][] dp, int [] nums, int left, int right) {
+        if(left == right - 1) {
+            return 0;
+        }
 
+        if(dp[left][right] > 0) {
+            return dp[left][right];
+        }
+
+        int t = 0;
+
+        for(int i = left + 1; i < right; i++) {
+            t = Math.max(t, nums[left] * nums[i] * nums[right]
+                    + burst(dp, nums, left, i)
+                    + burst(dp, nums, i, right));
+        }
+
+        dp[left][right] = t;
+
+        return t;
+    }
 }
