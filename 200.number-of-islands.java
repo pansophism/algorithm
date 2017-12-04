@@ -8,9 +8,8 @@ class Solution {
             for(int c = 0; c < grid[0].length; c++) {
                 if(grid[r][c] == '1') {
                     count++;
+                    populate(grid, r, c);
                 }
-
-                populate(grid, r, c);
             }
         }
 
