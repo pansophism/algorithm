@@ -8,59 +8,30 @@
  */
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode newHead = new ListNode(0);
-        ListNode pointer = newHead;
+        if(l1 == null) return l2;
+        if(l2 == null) return l1;
 
         int carry = 0;
+        ListNode newHead = new ListNode(0);
+        ListNode cur = newHead;
 
-        while(l1 != null && l2 != null) {
-            int v = l1.val + l2.val + carry;
-            l1 = l1.next;
-            l2 = l2.next;
+        while(l1 != null || l2 != null) {
+            int a = l1 == null ? 0 : l1.val;
+            int b = l2 == null ? 0 : l2.val;
 
-            if(v >= 10) {
-                carry = 1;
-            } else {
-                carry = 0;
-            }
+            int sum = (a + b + carry) % 10;
 
-            ListNode temp = new ListNode(v >= 10 ? v - 10 : v);
-            pointer.next = temp;
-            pointer = pointer.next;
-        }
+            carry = (a + b + carry) / 10;
 
-        while(l1 != null) {
-            int v = l1.val + carry;
-            l1 = l1.next;
-            if(v >= 10) {
-                carry = 1;
-            } else {
-                carry = 0;
-            }
+            cur.next = new ListNode(sum);
+            cur = cur.next;
 
-            ListNode temp = new ListNode(v >= 10 ? v - 10 : v);
-            pointer.next = temp;
-            pointer = pointer.next;
-        }
-
-        while(l2 != null) {
-            int v = l2.val + carry;
-            l2 = l2.next;
-
-            if(v >= 10) {
-                carry = 1;
-            } else {
-                carry = 0;
-            }
-
-            ListNode temp = new ListNode(v >= 10 ? v - 10 : v);
-            pointer.next = temp;
-            pointer = pointer.next;
+            l1 = l1 == null ? l1 : l1.next;
+            l2 = l2 == null ? l2 : l2.next;
         }
 
         if(carry == 1) {
-            ListNode temp = new ListNode(1);
-            pointer.next = temp;
+            cur.next = new ListNode(1);
         }
 
         return newHead.next;
