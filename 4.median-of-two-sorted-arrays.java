@@ -1,47 +1,37 @@
 class Solution {
 
-    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int l1 = nums1.length, l2 = nums2.length;
+	public double findMedianSortedArrays(int[] A, int[] B) {
+		int m = A.length, n = B.length;
+		int l = m + n;
+		if (l % 2 == 0) {
+			return (getKth(A, 0, B, 0, (l - 1) / 2 + 1)
+					+ getKth(A, 0, B, 0, l/2 + 1)) / 2.0;
+		} else {
+			return getKth(A, 0, B, 0, (l - 1) / 2 + 1);
+		}
+	}
 
-        int k = (l1 + l2) / 2;
+	public int getKth(int[] A, int aStart, int[] B, int bStart, int k) {
+		if (aStart >= A.length) {
+			return B[bStart + k - 1];
+		}
+		if (bStart >= B.length) {
+			return A[aStart + k - 1];
+		}
+		if (k == 1) {
+			return Math.min(A[aStart], B[bStart]);
+		}
+		int amid = aStart + k/2 - 1 >= A.length
+			? Integer.MAX_VALUE : A[aStart + k/2 - 1];
 
-        if((l1 + l2) % 2 == 1) {
-            return findKth(nums1, 0, l1, nums2, 0, l2, k + 1);
-        }
+		int bmid = bStart + k/2 - 1 >= B.length
+			? Integer.MAX_VALUE : B[bStart + k/2 - 1];
 
-        return (findKth(nums1, 0, l1, nums2, 0, l2, k)
-                + findKth(nums1, 0, l1, nums2, 0, l2, k + 1)) / 2;
-    }
+		if (amid > bmid) {
+			return getKth(A, aStart, B, bStart + k/2, k - k/2);
+		} else {
+			return getKth(A, aStart + k/2, B, bStart, k - k/2);
+		}
+	}
 
-    private double findKth(
-            int [] nums1, int lo1, int hi1,
-            int [] nums2, int lo2, int hi2,
-            int k) {
-
-        int m1 = lo1 + (hi1 - lo1) / 2;
-        int m2 = lo2 + (hi2 - lo2) / 2;
-
-        if(lo1 >= hi1) return nums2[lo2 + k - 1];
-        if(lo2 >= hi2) return nums1[lo1 + k - 1];
-
-        if(k <= 1) return Math.min(nums1[lo1], nums2[lo2]);
-
-        int len1 = hi1 - lo1;
-        int len2 = hi2 - lo2;
-
-        if(len1 / 2 + len2 / 2 + 1 >= k) {
-            if(nums1[m1] >= nums2[m2]) {
-                return findKth(nums1, lo1, m1, nums2, lo2, hi2, k);
-            } else {
-                return findKth(nums1, lo1, hi1, nums2, lo2, m2, k);
-            }
-        } else {
-            if(nums1[m1] >= nums2[m2]) {
-                return findKth(nums1, lo1, hi1, nums2, m2 + 1, hi2, k - (len2 / 2 + 1));
-            } else {
-                return findKth(nums1, m1 + 1, hi1, nums2, lo2, hi2, k - (len1 / 2 + 1));
-            }
-        }
-
-    }
 }
