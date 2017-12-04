@@ -21,16 +21,16 @@ class Solution {
 		if (k == 1) {
 			return Math.min(A[aStart], B[bStart]);
 		}
-		int amid = aStart + k/2 - 1 >= A.length
-			? Integer.MAX_VALUE : A[aStart + k/2 - 1];
+		int amid = aStart + k / 2 - 1 >= A.length
+			? Integer.MAX_VALUE : A[aStart + k / 2 - 1];
 
-		int bmid = bStart + k/2 - 1 >= B.length
-			? Integer.MAX_VALUE : B[bStart + k/2 - 1];
+		int bmid = bStart + k / 2 - 1 >= B.length
+			? Integer.MAX_VALUE : B[bStart + k / 2 - 1];
 
 		if (amid > bmid) {
-			return getKth(A, aStart, B, bStart + k/2, k - k/2);
+			return getKth(A, aStart, B, bStart + k / 2, k - k / 2);
 		} else {
-			return getKth(A, aStart + k/2, B, bStart, k - k/2);
+			return getKth(A, aStart + k / 2, B, bStart, k - k / 2);
 		}
 	}
 
