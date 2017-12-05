@@ -1,25 +1,29 @@
+
 class Solution {
+
     public int findCircleNum(int[][] M) {
-        if(M == null || M.length == 0 || M[0].length == 0) {
-            return 0;
-        }
 
-        return 0 - dfs(M, 0, 0, 0);
-    }
+        int [] visited = new int[M.length];
+        int count = 0;
 
-    private int dfs(int [][] nums, int count, int row, int col) {
-
-        for(int r = row; r < nums.length; r++) {
-            for(int c = col; c < nums[0].length; c++) {
-                if(nums[r][c] == 1) {
-                    nums[r][c] = count;
-                    dfs(nums, count, r, c);
-                }
+        for(int i = 0; i < M.length; i++) {
+            if(visited[i] == 0) {
+                dfs(M, visited, i);
+                count++;
             }
-
-            count--;
         }
 
-        return count + 1;
+        return count;
     }
+
+    private void dfs(int [][] nums, int[] visited, int i) {
+        for(int j = 0; j < nums.length; j++) {
+            if(nums[i][j] == 1 && visited[j] == 0) {
+                visited[j] = 1;
+                dfs(nums, visited, j);
+            }
+        }
+
+    }
+
 }
