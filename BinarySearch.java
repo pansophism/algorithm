@@ -30,7 +30,7 @@ public class BinarySearch {
             }
         }
 
-        return nums[lo - 1] == target ? lo - 1 : -1;
+        return nums[hi] == target ? hi : -1;
     }
 
     public static int binarySearchForFirstGreater(int [] nums, int target) {
