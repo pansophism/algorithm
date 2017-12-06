@@ -8,6 +8,9 @@ class Solution {
         }
 
         res[0] = findLastSmaller(nums, target);
+        if(res[0] > 0) {
+            res[0] += 1;
+        }
         res[1] = findLastSmaller(nums, target + 1);
 
         return res;
@@ -16,11 +19,11 @@ class Solution {
     private int findLastSmaller(int [] nums, int target) {
         int lo = 0, hi = nums.length - 1;
 
-        if(nums[lo] <= target) {
+        if(target <= nums[lo]) {
             return lo;
         }
 
-        if(nums[hi] < target) {
+        if(target > nums[hi]) {
             return hi + 1;
         }
 
