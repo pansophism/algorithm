@@ -15,7 +15,7 @@ public class Solution extends VersionControl {
         }
 
         if(!isBadVersion(start)) {
-            return start - 1;
+            return start;
         }
 
         if(!isBadVersion(end)) {
