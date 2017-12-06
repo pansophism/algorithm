@@ -12,8 +12,7 @@ class Solution {
             return new int[]{-1, -1};
         }
 
-        int end = findFirstGreater(nums, target + 1);
-        return new int[] {start, end - 1};
+        return new int[] {start, findFirstGreater(nums, target + 1) - 1};
     }
 
     private int findFirstGreater(int [] nums, int target) {
