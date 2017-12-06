@@ -7,42 +7,29 @@ class Solution {
             return res;
         }
 
-        int start = findLastSmaller(nums, target);
-        int end = findLastSmaller(nums, target + 1);
-
-        if(start == end) {
-            res[0] = -1;
-            res[1] = -1;
-            return res;
+        int start = findFirstGreater(nums, target);
+        if(start == nums.length || nums[start] != target) {
+            return new int[]{-1, -1};
         }
 
-        res[0] = start;
-        res[1] = end;
-
-        return res;
+        int end = findFirstGreater(nums, target + 1);
+        return new int[] {start, end - 1};
     }
 
-    private int findLastSmaller(int [] nums, int target) {
+    private int findFirstGreater(int [] nums, int target) {
         int lo = 0, hi = nums.length - 1;
 
-        if(target <= nums[lo]) {
-            return lo - 1;
-        }
-
-        if(target > nums[hi]) {
-            return hi;
-        }
-
         while(lo + 1 < hi) {
+
             int mid = lo + (hi - lo) / 2;
 
-            if(nums[mid] >= target) {
-                hi = mid;
-            } else {
+            if(nums[mid] < target) {
                 lo = mid;
+            } else {
+                hi = mid;
             }
         }
 
-        return lo;
+        return hi;
     }
 }
