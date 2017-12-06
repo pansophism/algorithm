@@ -1,7 +1,7 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
         int [] res = new int[2];
-        if(nums == null || nums.length == 0) {
+        if(nums == null || nums.length < 2) {
             res[0] = -1;
             res[1] = -1;
             return res;
