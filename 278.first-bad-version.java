@@ -15,11 +15,11 @@ public class Solution extends VersionControl {
         }
 
         if(!isBadVersion(start)) {
-            return start;
+            return start + 1;
         }
 
         if(!isBadVersion(end)) {
-            return end;
+            return end + 1;
         }
 
         return -1;
