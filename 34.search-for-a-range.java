@@ -9,7 +9,7 @@ class Solution {
             return res;
         }
 
-        int start = findFirstGreater(nums, target);
+        int start = findFirstGreater(nums, target - 1);
         if(start == nums.length || nums[start] != target) {
             return new int[]{-1, -1};
         }
@@ -45,11 +45,12 @@ class Solution {
     public static void main(String [] args) {
         Solution s = new Solution();
 
-        int [] d = {1, 2, 3, 4, 5, 6, 7, 7, 7, 7, 8, 9};
+        int [] d = {5,7,7,8,8,10};
 
         System.out.println("first greater 0 : " + s.findFirstGreater(d, 0));
         System.out.println("first greater 7 : " + s.findFirstGreater(d, 7));
         System.out.println("first greater 8 : " + s.findFirstGreater(d, 8));
+        System.out.println("first greater 9 : " + s.findFirstGreater(d, 9));
         System.out.println("first greater 10 : " + s.findFirstGreater(d, 10));
 
     }
