@@ -21,6 +21,6 @@ class Solution {
             }
         }
 
-        return lo + 1;
+        return hi;
     }
 }
