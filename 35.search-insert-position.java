@@ -3,7 +3,7 @@ class Solution {
 
         int lo = 0, hi = nums.length - 1;
 
-        if(target < nums[lo]) {
+        if(target <= nums[lo]) {
             return lo;
         }
 
