@@ -3,6 +3,14 @@ class Solution {
 
         int lo = 0, hi = nums.length - 1;
 
+        if(target < nums[lo]) {
+            return lo;
+        }
+
+        if(target > nums[hi]) {
+            return hi + 1;
+        }
+
         while(lo + 1 < hi) {
             int mid = lo + (hi - lo) / 2;
 
@@ -13,6 +21,6 @@ class Solution {
             }
         }
 
-        return hi;
+        return lo + 1;
     }
 }
