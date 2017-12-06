@@ -7,11 +7,17 @@ class Solution {
             return res;
         }
 
-        res[0] = findLastSmaller(nums, target);
-        if(res[0] > 0) {
-            res[0] += 1;
+        int start = findLastSmaller(nums, target);
+        int end = findLastSmaller(nums, target + 1);
+
+        if(start == end) {
+            res[0] = -1;
+            res[1] = -1;
+            return res;
         }
-        res[1] = findLastSmaller(nums, target + 1);
+
+        res[0] = start;
+        res[1] = end;
 
         return res;
     }
@@ -20,11 +26,11 @@ class Solution {
         int lo = 0, hi = nums.length - 1;
 
         if(target <= nums[lo]) {
-            return lo;
+            return lo - 1;
         }
 
         if(target > nums[hi]) {
-            return hi + 1;
+            return hi;
         }
 
         while(lo + 1 < hi) {
