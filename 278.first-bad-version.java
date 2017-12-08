@@ -14,12 +14,10 @@ public class Solution extends VersionControl {
             }
         }
 
-        if(!isBadVersion(start)) {
-            return start + 1;
-        }
-
-        if(!isBadVersion(end)) {
-            return end + 1;
+        if(isBadVersion(start)) {
+            return start;
+        } else if(isBadVersion(end)) {
+            return end;
         }
 
         return -1;
