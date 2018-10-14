@@ -28,6 +28,7 @@ class Solution {
                     while(l < r && nums[l] == nums[l - 1]) {
                         l++;
                     }
+
                     while(l < r && r < n - 1 && nums[r] == nums[r + 1]) {
                         r--;
                     }
