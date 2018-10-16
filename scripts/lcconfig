@@ -1,8 +1,20 @@
-
 {
-	"LANG": "java",
-	"USE_COLOR": true,
-	"COLOR_THEME": "default",
-	"AUTO_LOGIN": true,
-	"PLUGINS": {}
+    "auto_login": {
+        "enable": true
+    },
+    "code": {
+        "editor": "vim",
+        "lang": "java"
+    },
+    "color": {
+        "enable": true,
+        "theme": "default"
+    },
+    "icon": {
+        "theme": ""
+    },
+    "network": {
+        "concurrency": 10
+    },
+    "plugins": {}
 }
